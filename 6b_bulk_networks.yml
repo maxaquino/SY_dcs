@@ -1,0 +1,22 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+  vars_files:
+    - "{{ playbook_dir }}/vars/ethernet_networks_bulk.yml"
+  tasks:
+    - name: Create Ethernet Networks in bulk
+      oneview_ethernet_network:
+        config: "{{ config }}"
+        state: present
+        data:
+          vlanIdRange: '{{ item.value.vlanIdRange }}'
+          purpose: '{{ item.value.purpose }}'
+          namePrefix: '{{ item.value.namePrefix }}'
+          smartLink: '{{ item.value.smartLink }}'
+          privateNetwork: '{{ item.value.privateNetwork }}'
+          bandwidth: '{{ item.value.bandwidth }}'
+      delegate_to: localhost
+      with_dict: "{{ ethernet_network_bulk }}"
+
+    - debug: msg="{{ethernet_network_bulk | map(attribute='name') | list }}"

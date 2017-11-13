@@ -1,0 +1,27 @@
+---
+fc_logical_interconnect_group:
+  fc1:
+    name: "FC LIG"
+    type: "logical-interconnect-groupV300"
+    enclosureType: "SY12000"
+    interconnectBaySet: 2
+    redundancyType: "Redundant"
+    enclosureIndexes: [-1]
+    interconnectMapTemplate:
+        interconnectMapEntryTemplates:
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 5
+                - type: "Enclosure"
+                  relativeValue: "-1"
+            enclosureIndex: "-1"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/6c517203-bd46-4bc3-9f03-a3ee2823c1d1"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 2
+                - type: "Enclosure"
+                  relativeValue: "-1"
+            enclosureIndex: "-1"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/6c517203-bd46-4bc3-9f03-a3ee2823c1d1"

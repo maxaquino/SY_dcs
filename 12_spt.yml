@@ -1,0 +1,31 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+    group_var_file: "{{ playbook_dir }}/group_vars/all"
+  vars_files:
+    - "{{ playbook_dir }}/vars/spt.yml"
+
+  tasks:
+    - script: get_sht.sh
+      delegate_to: localhost
+
+      register: sht
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{sht.stdout}}"
+        insertafter: EOF
+
+    - include_vars: "{{group_var_file}}"
+
+    - name: Create a server profile template
+      oneview_server_profile_template:
+        config: "{{ config }}"
+        state: present
+        data:
+          "{{ item.value }}"
+      with_dict: '{{ server_profile_template }}'
+      delegate_to: localhost
+

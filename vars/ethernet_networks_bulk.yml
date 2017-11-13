@@ -1,0 +1,12 @@
+---
+ethernet_network_bulk:
+  Bulk1:
+    namePrefix: Prod
+    vlanIdRange: '1101-1104'
+    ethernetNetworkType: Tagged
+    purpose: General
+    smartLink: false
+    privateNetwork: false
+    bandwidth:
+        maximumBandwidth: 2500
+        typicalBandwidth: 2000

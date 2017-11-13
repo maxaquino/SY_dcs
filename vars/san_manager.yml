@@ -1,0 +1,40 @@
+san_manager:
+  SanManager1:
+    connectionInfo:
+      - name: Host
+        value: 172.18.20.1
+      - name: SnmpPort
+        value: 161
+      - name: SnmpUserName
+        value: dcs-SHA-AES128
+      - name: SnmpAuthLevel
+        value: AUTHPRIV
+      - name: SnmpAuthProtocol
+        value: SHA
+      - name: SnmpAuthString
+        value: "hpinvent!"
+      - name: SnmpPrivProtocol
+        value: AES128
+      - name: SnmpPrivString
+        value: "hpinvent!"
+    providerDisplayName: "Cisco San Plugin"
+  SanManager2:
+    connectionInfo:
+      - name: Host
+        value: 172.18.20.2
+      - name: SnmpPort
+        value: 161
+      - name: SnmpUserName
+        value: dcs-SHA-AES128
+      - name: SnmpAuthLevel
+        value: AUTHPRIV
+      - name: SnmpAuthProtocol
+        value: SHA
+      - name: SnmpAuthString
+        value: "hpinvent!"
+      - name: SnmpPrivProtocol
+        value: AES128
+      - name: SnmpPrivString
+        value: "hpinvent!"
+    providerDisplayName: "Cisco San Plugin"
+

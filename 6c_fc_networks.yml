@@ -1,0 +1,20 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+  vars_files:
+    - "{{ playbook_dir }}/vars/fc_networks.yml"
+  tasks:
+    - name: Create a Fibre Channel Network
+      oneview_fc_network:
+        config: "{{ config }}"
+        state: present
+        validate_etag: False
+        data:
+          name: '{{ item.value.name }}'
+          fabricType: '{{ item.value.fabricType }}'
+          linkStabilityTime: '{{ item.value.linkStabilityTime }}'
+          autoLoginRedistribution: '{{ item.value.autoLoginRedistribution }}'
+          managedSanUri: '{{ item.value.managedSanUri }}'
+      with_dict: "{{ fc_network }}"
+      delegate_to: localhost

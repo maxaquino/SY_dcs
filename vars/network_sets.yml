@@ -1,0 +1,14 @@
+---
+network_sets:
+  NetworkSet1:
+    name: Prod
+    networkUris:
+      - Prod_1101
+      - Prod_1102
+      - Prod_1103
+      - Prod_1104
+  NetworkSet2:
+    name: ESX
+    networkUris:
+      - esx mgmt
+      - esx vmotion

@@ -1,0 +1,4 @@
+- include: 6a_networks.yml
+- include: 6b_bulk_networks.yml
+- include: 6c_fc_networks.yml
+- include: 6d_fcoe_networks.yml

@@ -1,0 +1,15 @@
+---
+fc_network:
+  FC1:
+    name: 'SAN A FC'
+    fabricType: 'FabricAttach'
+    linkStabilityTime: '30'
+    autoLoginRedistribution: true
+    managedSanUri: "{{VSAN20_172_18_20_1}}"
+  FC2:
+    name: 'SAN B FC'
+    fabricType: 'FabricAttach'
+    linkStabilityTime: '30'
+    autoLoginRedistribution: true
+    managedSanUri: "{{VSAN21_172_18_20_2}}"
+

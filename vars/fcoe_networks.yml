@@ -1,0 +1,16 @@
+---
+fcoe_network:
+  FCoE1:
+    name: SAN A FCoE
+    vlanId: 10
+    managedSanUri: "{{VSAN10_172_18_20_1}}"
+    bandwidth:
+        maximumBandwidth: 20000
+        typicalBandwidth: 8000
+  FCoE2:
+    name: SAN B FCoE
+    vlanId: 11
+    managedSanUri: "{{VSAN11_172_18_20_2}}"
+    bandwidth:
+        maximumBandwidth: 20000
+        typicalBandwidth: 8000

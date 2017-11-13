@@ -1,0 +1,83 @@
+---
+logical_interconnect_group:
+  ff1:
+    name: "FF LIG"
+    type: "logical-interconnect-groupV300"
+    enclosureType: "SY12000"
+    uplinkSets:
+    - networkType: Ethernet
+      ethernetNetworkType: Tagged
+      lacpTimer: Short
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 3
+            type: Bay
+          - relativeValue: 1
+            type: Enclosure
+          - relativeValue: 61
+            type: Port
+        desiredSpeed: Auto
+      networkUris:
+      - "/rest/ethernet-networks/cecc7a39-3f6b-4b49-919e-c063b70e2625"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: UplinkSet1
+    interconnectBaySet: 3
+    redundancyType: "HighlyAvailable"
+    enclosureIndexes:
+      - "1"
+      - "2"
+      - "3"
+    interconnectMapTemplate:
+        interconnectMapEntryTemplates:
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "1"
+            enclosureIndex: "1"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/efcae7e3-9108-4bee-b944-84e91e987f64"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "2"
+            enclosureIndex: "2"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/2eff65c6-7fb4-4052-8a98-131eb24ed0e0"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "3"
+            enclosureIndex: "3"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/efcae7e3-9108-4bee-b944-84e91e987f64"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "3"
+            enclosureIndex: "3"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/efcae7e3-9108-4bee-b944-84e91e987f64"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "2"
+            enclosureIndex: "2"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/efcae7e3-9108-4bee-b944-84e91e987f64"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "1"
+            enclosureIndex: "1"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/2eff65c6-7fb4-4052-8a98-131eb24ed0e0"

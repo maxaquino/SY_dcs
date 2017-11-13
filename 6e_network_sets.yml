@@ -1,0 +1,16 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+  vars_files:
+    - vars/network_sets.yml
+  tasks:
+    - name: Create a Network Set
+      oneview_network_set:
+        config: '{{ config }}'
+        state: present
+        data:
+          name: '{{ item.value.name }}'
+          networkUris: '{{ item.value.networkUris }}'
+      with_dict: "{{ network_sets }}"
+      delegate_to: localhost

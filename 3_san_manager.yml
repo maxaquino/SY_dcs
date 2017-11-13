@@ -1,0 +1,32 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+    group_var_file: "{{ playbook_dir }}/group_vars/all"
+  vars_files:
+    - "{{ playbook_dir }}/vars/san_manager.yml"
+  tasks:
+    - name: Configure a Device Manager for the Cisco Provider
+      oneview_san_manager:
+        config: "{{ config }}"
+        state: present
+        data: 
+          "{{ item.value }}"
+      with_dict: "{{ san_manager }}"
+
+      delegate_to: localhost
+
+    - debug: msg="{{ san_manager }}"
+
+    - script: get_managed_sans.sh
+      delegate_to: localhost
+
+      register: managed_sans
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{managed_sans.stdout}}"
+        insertafter: EOF
+
+    - include_vars: "{{group_var_file}}"

@@ -1,0 +1,45 @@
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+  tasks:
+    - name: Gather facts about all SAS Interconnect Types
+      oneview_sas_interconnect_type_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - set_fact:
+        permitted_interconnect_type_uri: "{{sas_interconnect_types | map(attribute='uri') | list }}"
+
+    - debug: var=permitted_interconnect_type_uri
+
+
+    - name: Create a SAS Logical Interconnect Group
+      oneview_sas_logical_interconnect_group:
+        config: "{{ config }}"
+        state: present
+        data:
+          name: "SAS LIG"
+          state: "Active"
+          type: "sas-logical-interconnect-group"
+          enclosureType: "SY12000"
+          enclosureIndexes: [1]
+          interconnectBaySet: "1"
+          interconnectMapTemplate:
+            interconnectMapEntryTemplates:
+              - logicalLocation:
+                  locationEntries:
+                    - type: "Bay"
+                      relativeValue: "1"
+                    - type: "Enclosure"
+                      relativeValue: "1"
+                enclosureIndex: "1"
+                permittedInterconnectTypeUri: "{{ permitted_interconnect_type_uri[0] }}"
+              - logicalLocation:
+                  locationEntries:
+                    - type: "Bay"
+                      relativeValue: "4"
+                    - type: "Enclosure"
+                      relativeValue: "1"
+                enclosureIndex: "1"
+                permittedInterconnectTypeUri: "{{ permitted_interconnect_type_uri[0] }}"
+      delegate_to: localhost

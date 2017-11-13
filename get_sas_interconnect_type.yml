@@ -1,0 +1,10 @@
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+  tasks:
+    - name: Gather facts about all SAS Interconnect Types
+      oneview_sas_interconnect_type_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - debug: msg="{{sas_interconnect_types | map(attribute='name') | list }}"

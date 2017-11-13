@@ -1,0 +1,83 @@
+---
+server_profile:
+  sp1:
+    type: ServerProfileV6
+    name: SP103b
+    serverHardwareUri: "{{server hardware uri}}"
+    serverHardwareTypeUri: "{{SY_660_Gen9_2}}"
+    enclosureGroupUri: "{{EG1}}"
+    enclosureUri: "{{Encl2}}"
+    enclosureBay: 3
+    affinity: Bay
+    hideUnusedFlexNics: true
+    macType: Virtual
+    wwnType: Virtual
+    serialNumberType: Virtual
+    connections:
+    - id: 1
+      name: esx mgmt A
+      functionType: Ethernet
+      networkUri: "{{esx_mgmt}}"
+      portId: Mezz 3:1-a
+    - id: 2
+      name: SAN A
+      functionType: FibreChannel
+      networkUri: "{{SAN_A_FC}}"
+      portId: Mezz 3:1-b
+    - id: 3
+      name: esx vmotion A
+      functionType: Ethernet
+      networkUri: "{{esx_vmotion}}"
+      portId: Mezz 3:2-a
+    - id: 4
+      name: Prod A
+      functionType: Ethernet
+      networkUri: "{{Prod}}"
+      portId: Mezz 3:1-c
+    - id: 5
+      name: esx mgmt B
+      functionType: Ethernet
+      networkUri: "{{esx_mgmt}}"
+      portId: Mezz 3:2-c
+    - id: 6
+      name: SAN B
+      functionType: FibreChannel
+      networkUri: "{{SAN_B_FC}}"
+      portId: Mezz 3:2-b
+    - id: 7
+      name: esx vmotion B
+      functionType: Ethernet
+      networkUri: "{{esx_vmotion}}"
+      portId: Mezz 3:1-d
+    - id: 8
+      name: Prod B
+      functionType: Ethernet
+      networkUri: "{{Prod}}"
+      portId: Mezz 3:2-d
+    bootMode:
+      manageMode: true
+      mode: UEFIOptimized
+      pxeBootPolicy: Auto
+    boot:
+      manageBoot: true
+      order:
+      - HardDisk
+    bios:
+      manageBios: true
+      overriddenSettings:
+      - id: IntelProcVtd
+        value: Disabled
+      - id: ProcVirtualization
+        value: Disabled
+    localStorage:
+      controllers:
+      - deviceSlot: Embedded
+        mode: RAID
+        initialize: true
+        logicalDrives:
+        - name: Logical Drive 1
+          raidLevel: RAID1
+          bootable: true
+          numPhysicalDrives: 2
+          driveTechnology: SataHdd
+          sasLogicalJBODId: 

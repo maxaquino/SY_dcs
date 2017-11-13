@@ -1,0 +1,36 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+  vars_prompt:
+  - name: storage_system_uri
+    prompt: please enter the storage system uri
+    private: no
+  - name: storage_pool_uri
+    prompt: please enter the storage pool uri
+    private: no
+  - name: storage_vol_templ_name
+    prompt: please enter the volume template name
+    private: no
+  - name: storage_vol_templ_size
+    prompt: please enter the volume template size (KB)
+    private: no
+  tasks:
+    - name: Create a Storage Volume Template
+      oneview_storage_volume_template:
+        config: "{{ config }}"
+        state: present
+        data:
+            name: '{{storage_vol_templ_name}}'
+            state: "Configured"
+            description: "Example Template"
+            provisioning:
+                 shareable: true
+                 provisionType: "Thin"
+                 capacity: "{{ storage_vol_templ_size }}"
+                 storagePoolUri: '{{storage_pool_uri}}'
+            stateReason: "None"
+            storageSystemUri: '{{ storage_system_uri }}'
+            snapshotPoolUri: '{{storage_pool_uri}}'
+            type: StorageVolumeTemplateV3
+      delegate_to: localhost

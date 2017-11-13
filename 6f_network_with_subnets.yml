@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - script: create_subnet_pools.sh
+
+      delegate_to: localhost

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+  tasks:
+    - name: Gather facts about all Enclosure Groups
+      oneview_enclosure_group_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - debug: msg={{enclosure_groups | map(attribute='uri') | list}}

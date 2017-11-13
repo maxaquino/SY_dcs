@@ -1,0 +1,50 @@
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+    - group_var_file: "{{ playbook_dir }}/group_vars/all"
+  vars_files:
+    - "{{ playbook_dir }}/vars/ff_lig.yml"
+
+  tasks:
+    - name: remove the group_vars/all file before re-populating it
+      file: path="{{group_var_file}}" state=absent
+
+    - script: get_ethernet_networks.sh
+      delegate_to: localhost
+
+      register: en
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{en.stdout}}"
+        insertafter: EOF
+
+    - script: get_interconnect_types.sh
+      delegate_to: localhost
+
+      register: it
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{it.stdout}}"
+        insertafter: EOF
+
+    - include_vars: "{{group_var_file}}"
+
+    - name: Create a FlexFabric Logical Interconnect Group
+      oneview_logical_interconnect_group:
+        config: "{{ config }}"
+        state: present
+        data:
+            name: '{{ item.value.name }}'
+            type: '{{ item.value.type }}'
+            enclosureType: '{{ item.value.enclosureType }}'
+            uplinkSets: '{{ item.value.uplinkSets }}'
+            enclosureIndexes: '{{ item.value.enclosureIndexes }}'
+            interconnectBaySet: '{{ item.value.interconnectBaySet }}'
+            redundancyType: '{{ item.value.redundancyType }}'
+            interconnectMapTemplate: '{{ item.value.interconnectMapTemplate }}'
+      with_dict: "{{ logical_interconnect_group }}"
+      delegate_to: localhost

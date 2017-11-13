@@ -1,0 +1,38 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+    group_var_file: "{{ playbook_dir }}/group_vars/all"
+    ov_template: ProfileTemplate103
+    inv_hostname: sp103
+
+  tasks:
+    - script: get_sh.sh
+      delegate_to: localhost
+
+      register: sh
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{sh.stdout}}"
+        insertafter: EOF
+
+    - include_vars: "{{group_var_file}}"
+
+    - name : Create Server Profile from a Server Profile Template
+      oneview_server_profile:
+         config: "{{ config }}"
+         data:
+           server_template: "{{ ov_template }}"
+           name: "{{ inv_hostname }}"
+      delegate_to: localhost
+      register: result
+
+    - debug: msg="{{ result.msg }}"
+
+    - debug: var=server_profile
+    - debug: var=serial_number
+    - debug: var=server_hardware
+    - debug: var=compliance_preview
+    - debug: var=created

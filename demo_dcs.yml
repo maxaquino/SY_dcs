@@ -1,0 +1,16 @@
+- include: add_lic.yml
+- include: 1_datacenter.yml
+- include: 2_enclosures.yml
+- include: 3_san_manager.yml
+- include: 4_storage_system.yml
+- include: 6a_networks.yml
+- include: 6b_bulk_networks.yml
+- include: 6c_fc_networks.yml
+- include: 6d_fcoe_networks.yml
+- include: 6e_network_sets.yml
+- include: 7_sas_lig.yml
+- include: 8_fc_lig.yml
+- include: 9_ff_lig.yml
+- include: 10_eg.yml
+- include: 11_le.yml
+- include: 12_spt.yml

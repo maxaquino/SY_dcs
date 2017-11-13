@@ -1,0 +1,22 @@
+---
+ethernet_network:
+  Network1:
+    name: esx mgmt
+    vlanId: 1131
+    ethernetNetworkType: Tagged
+    purpose: Management
+    smartLink: false
+    privateNetwork: false
+    bandwidth:
+        maximumBandwidth: 2500
+        typicalBandwidth: 2000
+  Network2:
+    name: esx vmotion
+    vlanId: 1132
+    ethernetNetworkType: Tagged
+    purpose: VMMigration
+    smartLink: false
+    privateNetwork: false
+    bandwidth:
+        maximumBandwidth: 2500
+        typicalBandwidth: 2000

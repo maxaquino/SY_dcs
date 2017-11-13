@@ -1,0 +1,236 @@
+
+---
+logical_interconnect_group:
+  ff1:
+    name: "FF LIG"
+    type: "logical-interconnect-groupV300"
+    enclosureType: "SY12000"
+
+    uplinkSets:
+    - networkType: Ethernet
+      ethernetNetworkType: Tagged
+      lacpTimer: Short
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 64
+            type: Port
+          - relativeValue: 3
+            type: Bay
+          - relativeValue: 1
+            type: Enclosure
+        desiredSpeed: Auto
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 64
+            type: Port
+          - relativeValue: 6
+            type: Bay
+          - relativeValue: 2
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{esx_vmotion}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: esx vmotion
+    - networkType: Ethernet
+      ethernetNetworkType: Tagged
+      lacpTimer: Short
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 3
+            type: Bay
+          - relativeValue: 63
+            type: Port
+          - relativeValue: 1
+            type: Enclosure
+        desiredSpeed: Auto
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 63
+            type: Port
+          - relativeValue: 6
+            type: Bay
+          - relativeValue: 2
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{esx_mgmt}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: esx mgmt
+    - networkType: Ethernet
+      ethernetNetworkType: Tagged
+      lacpTimer: Short
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 65
+            type: Port
+          - relativeValue: 6
+            type: Bay
+          - relativeValue: 2
+            type: Enclosure
+        desiredSpeed: Auto
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 65
+            type: Port
+          - relativeValue: 3
+            type: Bay
+          - relativeValue: 1
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{Prod_1101}}"
+      - "{{Prod_1102}}"
+      - "{{Prod_1103}}"
+      - "{{Prod_1104}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: prod
+    - networkType: Ethernet
+      ethernetNetworkType: Tagged
+      lacpTimer: Short
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 3
+            type: Bay
+          - relativeValue: 62
+            type: Port
+          - relativeValue: 1
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{SAN_A_FCoE}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: SAN A FCoE
+    - networkType: FibreChannel
+      ethernetNetworkType: NotApplicable
+      lacpTimer: 
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 67
+            type: Port
+          - relativeValue: 6
+            type: Bay
+          - relativeValue: 2
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{SAN_B_FC}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: SAN B FC
+    - networkType: FibreChannel
+      ethernetNetworkType: NotApplicable
+      lacpTimer: 
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 3
+            type: Bay
+          - relativeValue: 67
+            type: Port
+          - relativeValue: 1
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{SAN_A_FC}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: SAN A FC
+    - networkType: Ethernet
+      ethernetNetworkType: Tagged
+      lacpTimer: Short
+      logicalPortConfigInfos:
+      - logicalLocation:
+          locationEntries:
+          - relativeValue: 62
+            type: Port
+          - relativeValue: 6
+            type: Bay
+          - relativeValue: 2
+            type: Enclosure
+        desiredSpeed: Auto
+      networkUris:
+      - "{{SAN_B_FCoE}}"
+      reachability: 
+      primaryPort: 
+      nativeNetworkUri: 
+      mode: Auto
+      name: SAN B FCoE
+
+    interconnectBaySet: 3
+    redundancyType: "HighlyAvailable"
+    enclosureIndexes:
+      - "1"
+      - "2"
+      - "3"
+    interconnectMapTemplate:
+        interconnectMapEntryTemplates:
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "1"
+            enclosureIndex: "1"
+            permittedInterconnectTypeUri: "{{Synergy_20Gb_Interconnect_Link_Module}}"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "2"
+            enclosureIndex: "2"
+            permittedInterconnectTypeUri: "{{Virtual_Connect_SE_40Gb_F8_Module_for_Synergy}}"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "3"
+            enclosureIndex: "3"
+            permittedInterconnectTypeUri: "{{Synergy_20Gb_Interconnect_Link_Module}}"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "3"
+            enclosureIndex: "3"
+            permittedInterconnectTypeUri: "{{Synergy_20Gb_Interconnect_Link_Module}}"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "2"
+            enclosureIndex: "2"
+            permittedInterconnectTypeUri: "{{Synergy_20Gb_Interconnect_Link_Module}}"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "1"
+            enclosureIndex: "1"
+            permittedInterconnectTypeUri: "{{Virtual_Connect_SE_40Gb_F8_Module_for_Synergy}}"

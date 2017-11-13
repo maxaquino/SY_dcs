@@ -1,0 +1,29 @@
+---
+logical_interconnect_group:
+  ff1:
+    name: "FF LIG 1F_Redundant"
+    type: "logical-interconnect-groupV300"
+    enclosureType: "SY12000"
+    uplinkSets: []
+    interconnectBaySet: 3
+    redundancyType: "Redundant"
+    enclosureIndexes:
+      - "1"
+    interconnectMapTemplate:
+        interconnectMapEntryTemplates:
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 6
+                - type: "Enclosure"
+                  relativeValue: "1"
+            enclosureIndex: "1"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/2eff65c6-7fb4-4052-8a98-131eb24ed0e0"
+          - logicalLocation:
+              locationEntries:
+                - type: "Bay"
+                  relativeValue: 3
+                - type: "Enclosure"
+                  relativeValue: "1"
+            enclosureIndex: "1"
+            permittedInterconnectTypeUri: "/rest/interconnect-types/2eff65c6-7fb4-4052-8a98-131eb24ed0e0"

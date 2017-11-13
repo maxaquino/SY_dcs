@@ -1,0 +1,15 @@
+---
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+    - managed_san_name: "SAN1_0"
+    - locate_wwn: "20:00:4A:2B:21:E0:00:01"
+  tasks:
+    - name: Gather facts about all Managed SANs
+      oneview_managed_san_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - debug: msg="name {{ item.name }}, san uri {{ item.uri }}"
+      with_items: "{{ managed_sans }}"
+

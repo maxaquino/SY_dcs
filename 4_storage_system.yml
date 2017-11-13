@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+  vars_files:
+    - "{{ playbook_dir }}/vars/storage_systems.yml"
+  tasks:
+    - name: Create Storage Systems
+      oneview_storage_system:
+        config: "{{ config }}"
+        state: present
+        data:
+          credentials:
+            ip_hostname: '{{ item.value.ip_hostname }}'
+            username: '{{ item.value.username }}'
+            password: '{{ item.value.password }}'
+          managedDomain: '{{ item.value.managedDomain }}'
+          managedPools: '{{ item.value.storage_pools }}'
+      with_dict: "{{ storage_systems }}"
+
+      delegate_to: localhost

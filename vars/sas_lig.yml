@@ -1,0 +1,26 @@
+---
+sas_logical_interconnect_group:
+  sas1:
+    name: "SAS LIG"
+    type: "sas-logical-interconnect-group"
+    enclosureType: "SY12000"
+    enclosureIndexes: [1]
+    interconnectBaySet: "1"
+    interconnectMapTemplate:
+      interconnectMapEntryTemplates:
+        - logicalLocation:
+            locationEntries:
+              - type: "Bay"
+                relativeValue: "1"
+              - type: "Enclosure"
+                relativeValue: "1"
+          enclosureIndex: "1"
+          permittedInterconnectTypeUri: "/rest/sas-interconnect-types/Synergy12GbSASConnectionModule"
+        - logicalLocation:
+            locationEntries:
+              - type: "Bay"
+                relativeValue: "4"
+              - type: "Enclosure"
+                relativeValue: "1"
+          enclosureIndex: "1"
+          permittedInterconnectTypeUri: "/rest/sas-interconnect-types/Synergy12GbSASConnectionModule"

@@ -1,0 +1,15 @@
+---
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+  vars_prompt:
+  - name: interconnect_substr
+    prompt: please enter the IC substring
+    private: no
+
+  tasks:
+    - name: Gather facts about all Interconnect Types
+      oneview_interconnect_type_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+    - debug: msg="{{interconnect_types | selectattr('name', 'match', '.*' + interconnect_substr) | map(attribute='name') | list}}, {{interconnect_types | selectattr('name', 'match', '.*' + interconnect_substr) | map(attribute='uri') | list}}"

@@ -1,0 +1,6 @@
+---
+- hosts: all
+
+  tasks:
+    - script: add_fc_licenses.sh
+      delegate_to: localhost

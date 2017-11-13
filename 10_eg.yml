@@ -1,0 +1,30 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+    group_var_file: "{{ playbook_dir }}/group_vars/all"
+  vars_files:
+    - "{{ playbook_dir }}/vars/eg.yml"
+
+  tasks:
+    - script: get_lig.sh
+      delegate_to: localhost
+
+      register: lig
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{lig.stdout}}"
+        insertafter: EOF
+
+    - include_vars: "{{group_var_file}}"
+
+    - name: Create an Enclosure Group
+      oneview_enclosure_group:
+        config: "{{ config }}"
+        state: present
+        data:
+           "{{ item.value }}"
+      with_dict: '{{ enclosure_group }}'
+      delegate_to: localhost

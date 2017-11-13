@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+  vars_files:
+    - "{{ playbook_dir }}/vars/fcoe_networks.yml"
+  tasks:
+    - name: Create a FCoE Network
+      oneview_fcoe_network:
+        config: "{{ config }}"
+        state: present
+        data:
+          name: '{{ item.value.name }}'
+          vlanId: '{{ item.value.vlanId }}'
+          managedSanUri: '{{ item.value.managedSanUri }}'
+      with_dict: "{{ fcoe_network }}"
+      delegate_to: localhost
+

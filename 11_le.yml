@@ -1,0 +1,40 @@
+---
+- hosts: all
+  vars:
+    config: "{{ playbook_dir }}/oneview_config.json"
+    group_var_file: "{{ playbook_dir }}/group_vars/all"
+  vars_files:
+    - "{{ playbook_dir }}/vars/le.yml"
+
+  tasks:
+    - script: get_enclosures.sh
+      delegate_to: localhost
+
+      register: enc
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{enc.stdout}}"
+        insertafter: EOF
+
+    - script: get_eg.sh
+      delegate_to: localhost
+
+      register: eg
+
+    - lineinfile:
+        dest: "{{group_var_file}}"
+        create: yes
+        line: "{{eg.stdout}}"
+        insertafter: EOF
+
+    - include_vars: "{{group_var_file}}"
+
+    - name: Create a Logical Enclosure (available only on HPE Synergy)
+      oneview_logical_enclosure:
+        config: "{{ config }}"
+        state: present
+        data:
+            "{{ logical_enclosure }}"
+      delegate_to: localhost

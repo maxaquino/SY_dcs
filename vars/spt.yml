@@ -1,0 +1,82 @@
+---
+server_profile_template:
+  spt1:
+    type: ServerProfileTemplateV2
+    name: ProfileTemplate103
+    description: "8 connections + smart array"
+    serverHardwareTypeUri: "{{SY_480_Gen9_2}}"
+    enclosureGroupUri: "{{EG1}}"
+    affinity: Bay
+    macType: Virtual
+    serialNumberType: Virtual
+    wwnType: Virtual
+    hideUnusedFlexNics: false
+    connections:
+    - id: 1
+      name: esx mgmt A
+      functionType: Ethernet
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{esx_mgmt}}"
+    - id: 2
+      name: SAN A
+      functionType: FibreChannel
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{SAN_A_FC}}"
+    - id: 3
+      name: esx vmotion A
+      functionType: Ethernet
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{esx_vmotion}}"
+    - id: 4
+      name: Prod A
+      functionType: Ethernet
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{Prod}}"
+    - id: 5
+      name: esx mgmt B
+      functionType: Ethernet
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{esx_mgmt}}"
+    - id: 6
+      name: SAN B
+      functionType: FibreChannel
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{SAN_B_FC}}"
+    - id: 7
+      name: esx vmotion B
+      functionType: Ethernet
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{esx_vmotion}}"
+    - id: 8
+      name: Prod B
+      functionType: Ethernet
+      portId: Auto
+      requestedMbps: 2500
+      networkUri: "{{Prod}}"
+    bootMode:
+      manageMode: true
+      mode: UEFIOptimized
+      pxeBootPolicy: Auto
+    boot:
+      manageBoot: true
+      order:
+      - HardDisk
+    localStorage:
+      controllers:
+      - deviceSlot: Embedded
+        mode: RAID
+        initialize: true
+        logicalDrives:
+        - name: Logical Drive 1
+          raidLevel: RAID1
+          bootable: true
+          numPhysicalDrives: 2
+          driveTechnology: SataHdd
+          sasLogicalJBODId:

@@ -1,0 +1,26 @@
+---
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+    - name: "Test Ethernet Network_1"
+  tasks:
+    - name: Gather facts about all Ethernet Networks
+      oneview_ethernet_network_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - debug: var=ethernet_networks
+
+    - name: Gather facts about all FCoE Networks
+      oneview_fcoe_network_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - debug: var=fcoe_networks
+
+    - name: Gather facts about all FC Networks
+      oneview_fc_network_facts:
+        config: "{{ config }}"
+      delegate_to: localhost
+
+    - debug: var=fc_networks

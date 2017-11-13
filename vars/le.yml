@@ -1,0 +1,11 @@
+---
+logical_enclosure:
+  name: LE1
+  enclosureUris:
+    - "{{Encl1}}"
+    - "{{Encl2}}"
+    - "{{Encl3}}"
+  enclosureGroupUri: "{{EG1}}"
+  firmwareBaselineUri: 
+  forceInstallFirmware: false
+

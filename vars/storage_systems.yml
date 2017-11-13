@@ -1,0 +1,40 @@
+---
+storage_systems:
+  StorageSystem1:
+    ip_hostname: "172.18.11.11"
+    username: "dcs"
+    password: "dcs"
+    managedDomain: "TestDomain"
+    storage_pools: [
+      {
+        type: StoragePoolV2,
+        name: FST_CPG1
+      },
+      {
+        type: StoragePoolV2,
+        name: CPG_FC-AO
+      },
+      {
+        type: StoragePoolV2,
+        name: CPG-SSD
+      }
+    ]
+  StorageSystem2:
+    ip_hostname: "172.18.11.12"
+    username: "dcs"
+    password: "dcs"
+    managedDomain: "TestDomain"
+    storage_pools: [
+      {
+        type: StoragePoolV2,
+        name: FST_CPG1
+      },
+      {
+        type: StoragePoolV2,
+        name: CPG_FC-AO
+      },
+      {
+        type: StoragePoolV2,
+        name: CPG-SSD
+      }
+    ]

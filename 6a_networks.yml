@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+    config: "/root/WORK/oneview-ansible/SY-dcs/oneview_config.json"
+  vars_files:
+    - "/root/WORK/oneview-ansible/SY-dcs/vars/ethernet_networks.yml"
+    - vars/ethernet_networks.yml
+  tasks:
+    - name: Create an Ethernet Network
+      oneview_ethernet_network:
+        config: "{{ config }}"
+        state: present
+        data:
+          "{{ item.value }}"
+          
+      with_dict: "{{ ethernet_network }}"
+
+      delegate_to: localhost

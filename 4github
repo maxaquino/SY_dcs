@@ -1,0 +1,30 @@
+# remove all comment lines from yml files
+for f in $( ls *.yml ); do sed '/#/d' $f > ../4-GITHUB/SY-dcs/$f; done
+
+# create directories
+mkdir ../4-GITHUB/SY-dcs/{files,filter_plugins,changes,group_vars,vars}
+
+# create empty license files
+> ../4-GITHUB/SY-dcs/files/SY_8Gb_FC_1.lic
+> ../4-GITHUB/SY-dcs/files/SY_8Gb_FC_2.lic
+
+touch ../4-GITHUB/SY-dcs/group_vars/all
+
+# remove extra (private) comments
+for f in $( ls *.sh ); do sed '/#M#/d' $f > ../4-GITHUB/SY-dcs/$f; done
+chmod +x ../4-GITHUB/SY-dcs/*.sh
+
+# remove all comment lines from yml files
+cd vars
+for f in $( ls *.yml ); do sed '/#/d' $f > ../../4-GITHUB/SY-dcs/vars/$f; done
+
+cd ..
+
+# create a .gitignore file
+cat<<EOL > ../4-GITHUB/SY-dcs/.gitignore
+changes
+filter_plugins
+oneview_config.sh
+oneview_config.json
+EOL
+

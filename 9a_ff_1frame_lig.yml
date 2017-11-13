@@ -1,0 +1,21 @@
+- hosts: all
+  vars:
+    - config: "{{ playbook_dir }}/oneview_config.json"
+  vars_files:
+    - "{{ playbook_dir }}/vars/ff_1_lig.yml"
+  tasks:
+    - name: Create a FlexFabric Logical Interconnect Group
+      oneview_logical_interconnect_group:
+        config: "{{ config }}"
+        state: present
+        data:
+            name: '{{ item.value.name }}'
+            type: '{{ item.value.type }}'
+            enclosureType: '{{ item.value.enclosureType }}'
+            uplinkSets: '{{ item.value.uplinkSets }}'
+            enclosureIndexes: '{{ item.value.enclosureIndexes }}'
+            interconnectBaySet: '{{ item.value.interconnectBaySet }}'
+            redundancyType: '{{ item.value.redundancyType }}'
+            interconnectMapTemplate: '{{ item.value.interconnectMapTemplate }}'
+      with_dict: "{{ logical_interconnect_group }}"
+      delegate_to: localhost
